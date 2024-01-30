@@ -17,3 +17,21 @@ test('Page has title text', async ({ page }) => {
   const locator = page.locator('h1');
   await expect(locator).toHaveText('Contact List App');
 });
+
+test('input incorrect text into form', async ({ page }) => {
+
+  //Given
+  const email = page.locator('form #email');
+  const password = page.locator('#password');
+  const submitButton = page.locator('#submit');
+  const expectedWarningText = 'Incorrect username or password';
+  const warning = page.locator('#error');
+
+  //When
+  await email.inputValue('blabla');
+  await password.inputValue('lalala');
+  await submitButton.click();
+
+  //Then
+  await expect(warning).toHaveText(expectedWarningText);
+});
