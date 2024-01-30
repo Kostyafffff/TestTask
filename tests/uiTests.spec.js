@@ -35,3 +35,10 @@ test('input incorrect text into form', async ({ page }) => {
   //Then
   await expect(warning).toHaveText(expectedWarningText);
 });
+
+test('Check correct link', async ({ page }) => {
+
+  const locator = page.locator('div > a');
+  await expect(locator).toHaveText('here');
+  await expect(locator).toHaveAttribute('href', 'https://documenter.getpostman.com/view/4012288/TzK2bEa8');
+});
